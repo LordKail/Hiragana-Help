@@ -18,30 +18,30 @@ monograph = [
 ["か","ka"],["き","ki"],["く","ku"],["け","ke"],["こ","ko"],  	    #K
 ["さ","sa"],["し","shi"],["す","su"],["せ","se"],["そ","so"], 	    #S
 ["た","ta"],["ち","chi"],["つ","tsu"],["て","te"],["と","to"],  	    #T
-["な","na"],["に","ni"],["ぬ","nu"],["ね","ne"],["の","no"],  	    #N 
-["は","ha"],["ひ","hi"],["ふ","fu"],["へ","he"],["ほ","ho"],   	    #H 
-["ま","ma"],["み","mi"],["む","mu"],["め","me"],["も","mo"],      #M 
+["な","na"],["に","ni"],["ぬ","nu"],["ね","ne"],["の","no"],  	    #N
+["は","ha"],["ひ","hi"],["ふ","fu"],["へ","he"],["ほ","ho"],   	    #H
+["ま","ma"],["み","mi"],["む","mu"],["め","me"],["も","mo"],      #M
 ["や","ya"],["ゆ","yu"],["よ","yo"],                      		    #Y
 ["ら","ra"],["り","ri"],["る","ru"],["れ","re"],["ろ","ro"],  	    #R
-["わ","wa"],["ゐ","wi"],["ゑ","we"],["を","wo"]            	    #W 
+["わ","wa"],["ゐ","wi"],["ゑ","we"],["を","wo"]            	    #W
 ]
 
 diacritic = [ #Monographs & Dakuten
 ["が","ga"],["ぎ","gi"],["ぐ","gu"],["げ","ge"],["ご","go"],               #G
 ["ざ","za"],["じ","ji"],["ず","zu"],["ぜ","ze"],["ぞ","zo"],                  #Z
-["だ","da"],["ぢ","dzi"],["づ","dzu"],["で","de"],["ど","do"],           #D, dzi and dzu can be considered ji and zu 
+["だ","da"],["ぢ","dzi"],["づ","dzu"],["で","de"],["ど","do"],           #D, dzi and dzu can be considered ji and zu
 ["ば","ba"],["び","bi"],["ぶ","bu"],["べ","be"],["ぼ","bo"],              #B
 ["ぱ","pa"],["ぴ","pi"],["ぷ","pu"],["ぺ","pe"],["ぽ","po"]       #P
 ]
 
-digraph = [ 
-["きゃ","kya"],["きゅ","kyu"],["きょ","kyo"],         
-["しゃ","sha"],["しゅ","shu"],["しょ","sho"],         
-["ちゃ","cha"],["ちゅ","chu"],["ちょ","cho"],         
-["にゃ","nya"],["にゅ","nyu"],["にょ","nyo"],         
-["ひゃ","hya"],["ひゅ","hyu"],["ひょ","hyo"],         
-["みゃ","mya"],["みゅ","myu"],["みょ","myo"],     
-["りゃ","rya"],["りゅ","ryu"],["りょ","ryo"]            
+digraph = [
+["きゃ","kya"],["きゅ","kyu"],["きょ","kyo"],
+["しゃ","sha"],["しゅ","shu"],["しょ","sho"],
+["ちゃ","cha"],["ちゅ","chu"],["ちょ","cho"],
+["にゃ","nya"],["にゅ","nyu"],["にょ","nyo"],
+["ひゃ","hya"],["ひゅ","hyu"],["ひょ","hyo"],
+["みゃ","mya"],["みゅ","myu"],["みょ","myo"],
+["りゃ","rya"],["りゅ","ryu"],["りょ","ryo"]
 ]
 
 digrdiac = [ #Digraphs & Diacritics
@@ -53,7 +53,7 @@ digrdiac = [ #Digraphs & Diacritics
 ]
 PLAYWITH = monograph+diacritic+digraph+digrdiac
 ##Remove things from here to not have them in play
-##you can also comment out lines within each list using # to disable them 
+##you can also comment out lines within each list using # to disable them
 LENGTH = 5
 ##You can change how many characters appear in game 2 changing this.
 
@@ -65,15 +65,18 @@ program = input("""Choose Program\n\n
                             3. Check what characters are enabled\n
                             4. Instructions for each Program\n> """)
 #simple game
+
 if program == "1":
     while True:
         guess = PLAYWITH[randint(0,len(PLAYWITH)-1)]
-        q = input("Write the Hiragana for ["+ str( guess[0] ) +"] : ")
- 
-        if q != guess[0]:
+        q = input("Write the Hiragana for ["+ str( guess[0] ) +"] (or 'q' to exit): ")
+
+        if q == 'q':
+            break
+        elif q != guess[0]:
             x = 1
             while q != guess[0]:
-                q = input(str(x)+": Write the Hiragana for ["+ str( guess[0] ) +"] : ")
+                q = input(str(x)+": Try again! Write the Hiragana for ["+ str( guess[0] ) +"]: ")
                 x +=1
 
 #decode
@@ -86,11 +89,13 @@ if program == "2":
             jap += (PLAYWITH[number][0])
             eng += (PLAYWITH[number][1])
 
-        q = input(jap+"\nPlease input the translation: ")
+        q = input(jap+"\nPlease input the translation (or 'q' to exit): ")
         q = q.replace(" ","")
         q = q.replace("-","")
-        
-        if q == eng:
+
+        if q == 'q':
+            break
+        elif q == eng:
             print("correct!")
         else:
             print(eng)
@@ -100,7 +105,7 @@ if program == "3":
     checkthese = ["あ","か","さ","た","な","は","ま","や","ら","わ","が","ざ","だ","ば","ぱ","きょ","しゃ","ちゃ","にゃ","ひゃ","みゃ","りゃ","ぎゃ","じゃ","ぢゃ","びゃ","ぴゃ"]
     letters = ["∅","K","S","T","N","H","M","Y","R","W","G","Z","D","B","P","K​","S​","C​","N​","H​","M​","R​","G","Z","D","B","P​​"]
     monographs = [ "あ,い,う,え,お", "か,き,く,け,こ","さ,し,す,せ,そ",
-                                "た,ち,つ,て,と", "な,に,ぬ,ね,の", "は,ひ,ふ,へ,ほ",                
+                                "た,ち,つ,て,と", "な,に,ぬ,ね,の", "は,ひ,ふ,へ,ほ",
                                 "ま,み,む,め,も", "や,ゆ,よ", "ら,り,る,れ,ろ",
                                 "わ,ゐ,ゑ,を",
                                 #Diacritics
@@ -123,7 +128,7 @@ if program == "3":
         if letters[i] =="R​":
             print("\nDigraphs and Diacritics")
 
-        
+
 #instructions
 if program == "4":
     print("""1. Write the Hiragana -
@@ -139,16 +144,15 @@ if program == "4":
 
     print("""\n2. Decipher the Monographs -
         For this game you will be typing out the romanji of the Hiragana shown on screen.
-        Using a standard (Non-IME) keyboard you need to try convert the nonsensical word to be correct. 
+        Using a standard (Non-IME) keyboard you need to try convert the nonsensical word to be correct.
         Example:
               "ちはすゆへ
                 Please input the translation:"
 
             The translation is chi-ha-su-yu-he, and it could be inputted in three ways.
-            
+
             1. No spaces [chihasuyuhe]
             2. Spaces [chi ha su yu he]
             3. Dashes [chi-ha-su-yu-he]
 
             Restart the program and pick a game!""")
-        
